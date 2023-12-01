@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const express = require('express');
+
+const app = express();
 
 mongoose.connect(
   "mongodb+srv://pritam17281995:PBPMzLMSU8BZeWKp@reminder.mq3d8f6.mongodb.net/todos_Item?retryWrites=true&w=majority"
@@ -41,6 +44,7 @@ const createProduct = async (req, res) => {
 };
 
 const getProducts = async (req, res) => {
+    app.use(express.json());
     console.log('request to get todos...');
   UserModel.find({})
     .then(function (todos) {
