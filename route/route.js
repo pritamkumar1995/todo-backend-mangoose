@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const {getProducts,createProduct, updateItem } = require('./model');
+console.log("into option route.....");
 
 router.get("/get_items", getProducts);
 router.post("/new_item", createProduct);
