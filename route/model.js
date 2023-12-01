@@ -30,6 +30,7 @@ const UserSchema = mongoose.Schema({
 const UserModel = mongoose.model("todos", UserSchema);
 
 const createProduct = async (req, res) => {
+    console.log('request to add todos...');
   const article = new UserModel(req.body);
   try {
     await article.save();
@@ -40,6 +41,7 @@ const createProduct = async (req, res) => {
 };
 
 const getProducts = async (req, res) => {
+    console.log('request to get todos...');
   UserModel.find({})
     .then(function (todos) {
       res.json(todos);
@@ -50,7 +52,7 @@ const getProducts = async (req, res) => {
 };
 
 const updateItem = async (req, res, next) => {
-    console.log('id value update..',req.body);
+    console.log('request to update todos...');
   const doc = await UserModel.findOne({ id: req.body.id });
   const update = req.body.value;
   try {
@@ -62,6 +64,12 @@ const updateItem = async (req, res, next) => {
   }
 };
 
+const delete_Item = async (req, res, next) => {
+    console.log('request to delete todos...');
+ 
+};
+
 exports.createProduct = createProduct;
 exports.getProducts = getProducts;
+exports.delete_Item = delete_Item;
 exports.updateItem = updateItem;
