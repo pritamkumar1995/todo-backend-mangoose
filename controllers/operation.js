@@ -63,9 +63,8 @@ const delete_Item = async (req, res, next) => {
     console.log("id",req.body);
     const id =req.body.id;
   try {
-    console.log("req.body.id",req.body.id);
+    console.log("req.body.id",req.body);
     const user = await UserModel.findOne({id});
-
     if (!user) {
       res.status(404);
       return next(new Error("User not found"));
