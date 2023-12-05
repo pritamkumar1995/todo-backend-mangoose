@@ -64,7 +64,7 @@ const delete_Item = async (req, res, next) => {
     const id =req.body.id;
   try {
     console.log("req.body.id",req.body.id);
-    const user = await UserModel.findOne(id);
+    const user = await UserModel.findOne({id});
 
     if (!user) {
       res.status(404);
