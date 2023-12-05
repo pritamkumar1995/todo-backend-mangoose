@@ -26,7 +26,6 @@ const getProducts = async (req, res, next) => {
     console.log('request to get todos...');
     try{
       const todos = await UserModel.find()
-
       res.status(200).json({
         success: true,
         todos,
@@ -39,21 +38,23 @@ const getProducts = async (req, res, next) => {
 
 const updateItem = async (req, res, next) => {
   console.log('request to update todos...');
+  const id = req.body.id;
+  const value = req.body.value;
+  console.log(value);
   try {
-    const todo = await UserModel.findOne(req.body.id);
+    const todo = await UserModel.findOne({id});
     if (!todo) {
       res.status(404);
       return next(new Error("User not found"));
     }
-    await doc.updateOne(update);
-    const updatedDoc = await UserModel.findOne({ id: req.body.id },{$set: req.body.value});
+    const updatedDoc = await UserModel.updateOne({ id: req.body.id }, value)
     res.status(200).json({
       success: true,
-      updatedDoc,
+      updatedDoc
     });
-
-  } catch {
-    res.status(500).send(error);
+  } catch(error) {
+    console.log(error);
+      return next(error);
   }
 };
 
